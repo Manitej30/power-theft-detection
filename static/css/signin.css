@@ -1,0 +1,51 @@
+/* Signin specific styles - extends auth.css */
+.form-container {
+    max-width: 480px;
+}
+
+/* btn-login extends btn-submit from auth.css */
+.btn-login {
+    width: 100%;
+    background: #ED6436;
+    color: white;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(237, 100, 54, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(237, 100, 54, 0.6);
+    background: #d4552a;
+}
+
+.btn-login:active {
+    transform: translateY(0);
+}
+
+.btn-login.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.btn-login.loading::after {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 10px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.8s linear infinite;
+}
+

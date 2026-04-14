@@ -1,0 +1,401 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f8f9fa;
+    font-family: 'Nunito Sans', 'Segoe UI', sans-serif;
+}
+
+.graphs-section {
+    padding: 60px 20px;
+    background: linear-gradient(135deg, rgba(237, 100, 54, 0.05) 0%, rgba(101, 193, 120, 0.05) 100%);
+    min-height: 100vh;
+}
+
+.graphs-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.page-header h1 {
+    font-size: 42px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.page-header h1 i {
+    color: #ED6436;
+}
+
+.page-header p {
+    font-size: 18px;
+    color: #7f8c8d;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.graphs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.graph-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.graph-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+}
+
+.graph-card-header {
+    background: linear-gradient(135deg, #ED6436 0%, #d4552a 100%);
+    color: white;
+    padding: 20px 25px;
+    text-align: center;
+}
+
+.graph-card-header h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.graph-card-header i {
+    font-size: 24px;
+}
+
+.graph-card-body {
+    padding: 25px;
+    position: relative;
+}
+
+.graph-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.graph-image-wrapper:hover {
+    box-shadow: 0 8px 20px rgba(237, 100, 54, 0.3);
+}
+
+.graph-image-wrapper:hover .zoom-overlay {
+    opacity: 1;
+}
+
+.graph-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.graph-image-wrapper:hover img {
+    transform: scale(1.05);
+}
+
+.zoom-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(237, 100, 54, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.zoom-overlay i {
+    font-size: 48px;
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.graph-description {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #ED6436;
+}
+
+.graph-description p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Lightbox/Modal Styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    overflow: auto;
+    animation: fadeIn 0.3s ease;
+}
+
+.lightbox.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90vh;
+    margin: auto;
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.lightbox-image {
+    width: 100%;
+    height: auto;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-title {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    background: rgba(237, 100, 54, 0.9);
+    padding: 15px 30px;
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    background: rgba(237, 100, 54, 0.9);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10000;
+}
+
+.lightbox-close:hover {
+    background: #ED6436;
+    transform: rotate(90deg);
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(237, 100, 54, 0.9);
+    color: white;
+    font-size: 30px;
+    padding: 15px 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-nav:hover {
+    background: #ED6436;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-prev {
+    left: 30px;
+}
+
+.lightbox-next {
+    right: 30px;
+}
+
+.lightbox-counter {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    color: white;
+    font-size: 18px;
+    background: rgba(237, 100, 54, 0.9);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .graphs-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .graphs-section {
+        padding: 40px 15px;
+    }
+
+    .page-header h1 {
+        font-size: 32px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .page-header p {
+        font-size: 16px;
+    }
+
+    .graphs-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .graph-image-wrapper {
+        height: 300px;
+    }
+
+    .lightbox-content {
+        max-width: 95%;
+    }
+
+    .lightbox-close {
+        top: 10px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 30px;
+    }
+
+    .lightbox-nav {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        padding: 10px 15px;
+    }
+
+    .lightbox-prev {
+        left: 15px;
+    }
+
+    .lightbox-next {
+        right: 15px;
+    }
+
+    .lightbox-title {
+        font-size: 18px;
+        padding: 12px 20px;
+        bottom: -50px;
+    }
+
+    .lightbox-counter {
+        top: 10px;
+        left: 15px;
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-header h1 {
+        font-size: 28px;
+    }
+
+    .graph-card-header h3 {
+        font-size: 18px;
+    }
+
+    .graph-image-wrapper {
+        height: 250px;
+    }
+
+    .lightbox-title {
+        font-size: 16px;
+        padding: 10px 15px;
+    }
+}
+

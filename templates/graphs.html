@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Data Visualization - Power Theft Detection in Smart Grids Using Quantum Machine Learning</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Flaticon Font -->
+    <link href="../static/lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../static/css/style.css" rel="stylesheet">
+    
+    <!-- Graphs Page Custom Stylesheet -->
+    <link href="../static/css/graphs.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
+            <a href="/home" class="navbar-brand d-block">
+                <h1 class="m-0 display-5 text-capitalize text-white"><span class="text-primary">QML </span>Grid</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-right px-3" id="navbarCollapse">
+                <div class="navbar-nav ml-auto py-0">
+                    <a href="/home" class="nav-item nav-link">Power Theft Prediction</a>
+                    <a href="/graphs" class="nav-item nav-link active">Graphs</a>
+                    <a href="../static/Notebook.html" class="nav-item nav-link">Notebook</a>
+                    <a href="/" class="nav-item nav-link">Logout</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Graphs Section Start -->
+    <div class="graphs-section">
+        <div class="graphs-container">
+            <div class="page-header">
+                <h1>
+                    <i class="fas fa-chart-bar"></i>
+                    Data Visualization
+                </h1>
+                <p>Comprehensive analysis and performance metrics of the Power Theft Detection System</p>
+            </div>
+
+            <div class="graphs-grid">
+                <!-- Sample Outcomes -->
+                <div class="graph-card">
+                    <div class="graph-card-header">
+                        <h3>
+                            <i class="fas fa-chart-pie"></i>
+                            Sample Outcomes
+                        </h3>
+                    </div>
+                    <div class="graph-card-body">
+                        <div class="graph-image-wrapper" data-image="../static/download.png" data-title="Sample Outcomes">
+                            <img src="../static/download.png" alt="Sample Outcomes" loading="lazy">
+                            <div class="zoom-overlay">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="graph-description">
+                            <p>Visual representation of sample prediction outcomes showing the distribution of theft and no-theft cases in the dataset.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accuracy Comparison -->
+                <div class="graph-card">
+                    <div class="graph-card-header">
+                        <h3>
+                            <i class="fas fa-chart-line"></i>
+                            Accuracy Comparison
+                        </h3>
+                    </div>
+                    <div class="graph-card-body">
+                        <div class="graph-image-wrapper" data-image="../static/download (1).png" data-title="Accuracy Comparison">
+                            <img src="../static/download (1).png" alt="Accuracy Comparison" loading="lazy">
+                            <div class="zoom-overlay">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="graph-description">
+                            <p>Comparative analysis of accuracy metrics across different machine learning models and algorithms used in the system.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Precision -->
+                <div class="graph-card">
+                    <div class="graph-card-header">
+                        <h3>
+                            <i class="fas fa-bullseye"></i>
+                            Precision
+                        </h3>
+                    </div>
+                    <div class="graph-card-body">
+                        <div class="graph-image-wrapper" data-image="../static/download (2).png" data-title="Precision">
+                            <img src="../static/download (2).png" alt="Precision" loading="lazy">
+                            <div class="zoom-overlay">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="graph-description">
+                            <p>Precision metric analysis showing the proportion of correctly identified positive cases among all predicted positive cases.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recall -->
+                <div class="graph-card">
+                    <div class="graph-card-header">
+                        <h3>
+                            <i class="fas fa-redo"></i>
+                            Recall
+                        </h3>
+                    </div>
+                    <div class="graph-card-body">
+                        <div class="graph-image-wrapper" data-image="../static/download (3).png" data-title="Recall">
+                            <img src="../static/download (3).png" alt="Recall" loading="lazy">
+                            <div class="zoom-overlay">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="graph-description">
+                            <p>Recall metric evaluation demonstrating the system's ability to identify all relevant positive cases in the dataset.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- F1 Score -->
+                <div class="graph-card">
+                    <div class="graph-card-header">
+                        <h3>
+                            <i class="fas fa-balance-scale"></i>
+                            F1 Score
+                        </h3>
+                    </div>
+                    <div class="graph-card-body">
+                        <div class="graph-image-wrapper" data-image="../static/download (4).png" data-title="F1 Score">
+                            <img src="../static/download (4).png" alt="F1 Score" loading="lazy">
+                            <div class="zoom-overlay">
+                                <i class="fas fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="graph-description">
+                            <p>F1 Score metric representing the harmonic mean of precision and recall, providing a balanced performance measure.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Graphs Section End -->
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <span class="lightbox-counter" id="lightbox-counter"></span>
+        <div class="lightbox-content">
+            <img id="lightbox-image" class="lightbox-image" src="" alt="">
+            <div class="lightbox-title" id="lightbox-title"></div>
+        </div>
+        <span class="lightbox-nav lightbox-prev" id="lightbox-prev">
+            <i class="fas fa-chevron-left"></i>
+        </span>
+        <span class="lightbox-nav lightbox-next" id="lightbox-next">
+            <i class="fas fa-chevron-right"></i>
+        </span>
+    </div>
+
+    <!-- Footer Start -->
+    <div class="container-fluid text-white py-4 px-sm-3 px-md-5" style="background: #111111;">        
+        <div class="text-center text-md-between mb-3 mb-md-0">
+            <p class="m-0 text-white">
+                &copy; <a class="text-white font-weight-bold" href="#">QML Grid</a>. All Rights Reserved. 
+                Designed by <a class="text-white font-weight-bold" href="#">QML Grid</a>
+            </p>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/lib/easing/easing.min.js"></script>
+    <script src="../static/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../static/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="../static/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="../static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="../static/mail/jqBootstrapValidation.min.js"></script>
+    <script src="../static/mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="../static/js/main.js"></script>
+
+    <!-- Graphs Page Custom Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxTitle = document.getElementById('lightbox-title');
+            const lightboxClose = document.getElementById('lightbox-close');
+            const lightboxPrev = document.getElementById('lightbox-prev');
+            const lightboxNext = document.getElementById('lightbox-next');
+            const lightboxCounter = document.getElementById('lightbox-counter');
+            
+            const graphImages = document.querySelectorAll('.graph-image-wrapper');
+            let currentImageIndex = 0;
+            const images = [];
+
+            // Collect all images data
+            graphImages.forEach((wrapper, index) => {
+                const img = wrapper.querySelector('img');
+                const imageData = {
+                    src: wrapper.getAttribute('data-image'),
+                    title: wrapper.getAttribute('data-title'),
+                    index: index
+                };
+                images.push(imageData);
+            });
+
+            // Open lightbox
+            function openLightbox(index) {
+                currentImageIndex = index;
+                updateLightbox();
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            // Update lightbox content
+            function updateLightbox() {
+                const currentImage = images[currentImageIndex];
+                lightboxImage.src = currentImage.src;
+                lightboxTitle.textContent = currentImage.title;
+                lightboxCounter.textContent = `${currentImageIndex + 1} / ${images.length}`;
+            }
+
+            // Close lightbox
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            // Navigate to previous image
+            function showPrevImage() {
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                updateLightbox();
+            }
+
+            // Navigate to next image
+            function showNextImage() {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                updateLightbox();
+            }
+
+            // Event listeners for image clicks
+            graphImages.forEach((wrapper, index) => {
+                wrapper.addEventListener('click', function() {
+                    openLightbox(index);
+                });
+            });
+
+            // Close button
+            lightboxClose.addEventListener('click', closeLightbox);
+
+            // Previous button
+            lightboxPrev.addEventListener('click', function(e) {
+                e.stopPropagation();
+                showPrevImage();
+            });
+
+            // Next button
+            lightboxNext.addEventListener('click', function(e) {
+                e.stopPropagation();
+                showNextImage();
+            });
+
+            // Close on background click
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (lightbox.classList.contains('active')) {
+                    if (e.key === 'Escape') {
+                        closeLightbox();
+                    } else if (e.key === 'ArrowLeft') {
+                        showPrevImage();
+                    } else if (e.key === 'ArrowRight') {
+                        showNextImage();
+                    }
+                }
+            });
+
+            // Touch swipe support for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            lightbox.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            lightbox.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) {
+                    showNextImage();
+                }
+                if (touchEndX > touchStartX + 50) {
+                    showPrevImage();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
+

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Prediction Results - Power Theft Detection in Smart Grids Using Quantum Machine Learning</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Flaticon Font -->
+    <link href="../static/lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../static/css/style.css" rel="stylesheet">
+    
+    <!-- Result Page Custom Stylesheet -->
+    <link href="../static/css/result.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
+            <a href="/" class="navbar-brand d-block">
+                <h1 class="m-0 display-5 text-capitalize text-white"><span class="text-primary">QML </span>Grid</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-right px-3" id="navbarCollapse">
+                <div class="navbar-nav ml-auto py-0">
+                    <a href="/home" class="nav-item nav-link active">Power Theft Prediction</a>
+                    <a href="/graphs" class="nav-item nav-link">Graphs</a>
+                    <a href="../static/Notebook.html" class="nav-item nav-link">Notebook</a>
+                    <a href="/" class="nav-item nav-link">Logout</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <div class="content-container">
+        <div class="page-header">
+            <h1><i class="fas fa-chart-line"></i> Prediction Results</h1>
+            <p>Power Theft Detection Analysis Report</p>
+        </div>
+
+        {% if results == "Invalid file format" %}
+            <div class="error-message">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Invalid File Format</h3>
+                <p>Please upload a valid CSV file.</p>
+                <a href="/home" class="btn-action">Try Again</a>
+            </div>
+        {% elif results and columns %}
+            {% set total_count = results|length %}
+            {% set prediction_index = (columns|length) - 1 %}
+
+            <!-- Statistics Cards -->
+            <div class="stats-container">
+                <div class="stat-card total">
+                    <i class="fas fa-database"></i>
+                    <h3 id="total-count">{{ total_count }}</h3>
+                    <p>Total Records</p>
+                </div>
+                <div class="stat-card no-theft">
+                    <i class="fas fa-check-circle"></i>
+                    <h3 id="no-theft-count">0</h3>
+                    <p>No Theft Detected (<span id="no-theft-percentage">0</span>%)</p>
+                </div>
+                <div class="stat-card theft">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3 id="theft-count">0</h3>
+                    <p>Theft Detected (<span id="theft-percentage">0</span>%)</p>
+                </div>
+            </div>
+
+            <!-- Alert Box -->
+            <div id="alert-container"></div>
+
+            <!-- Results Table -->
+            <div class="results-section">
+                <div class="section-title">
+                    <i class="fas fa-table"></i>
+                    <span>Detailed Results</span>
+                </div>
+                <div class="table-container">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                {% for column in columns %}
+                                    {% if loop.index == columns|length %}
+                                        <th class="sticky-column">{{ column }}</th>
+                                    {% else %}
+                                        <th>{{ column }}</th>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in results %}
+                                <tr>
+                                    {% for cell in row %}
+                                        {% if loop.index == columns|length and cell == 'Theft' %}
+                                            <td class="sticky-column">
+                                                <span class="prediction-badge theft">
+                                                    <i class="fas fa-exclamation-triangle"></i> {{ cell }}
+                                                </span>
+                                            </td>
+                                        {% elif loop.index == columns|length and cell == 'No-Theft' %}
+                                            <td class="sticky-column">
+                                                <span class="prediction-badge no-theft">
+                                                    <i class="fas fa-check-circle"></i> {{ cell }}
+                                                </span>
+                                            </td>
+                                        {% else %}
+                                            <td>{{ cell }}</td>
+                                        {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Recommendations Section -->
+            <div class="results-section">
+                <div class="section-title">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Recommendations</span>
+                </div>
+                <div class="recommendations-grid" id="recommendations-grid">
+                        <div class="recommendation-card">
+                            <h4><i class="fas fa-search"></i> Immediate Investigation</h4>
+                            <p>Conduct on-site inspections for all flagged locations. Verify meter readings and check for any unauthorized connections or tampering.</p>
+                        </div>
+                        <div class="recommendation-card">
+                            <h4><i class="fas fa-clipboard-check"></i> Data Verification</h4>
+                            <p>Cross-reference the flagged records with historical data and billing records to identify patterns or discrepancies.</p>
+                        </div>
+                        <div class="recommendation-card">
+                            <h4><i class="fas fa-user-shield"></i> Security Audit</h4>
+                            <p>Perform a comprehensive security audit of the smart grid infrastructure, focusing on areas with detected anomalies.</p>
+                        </div>
+                        <div class="recommendation-card">
+                            <h4><i class="fas fa-bell"></i> Alert System</h4>
+                            <p>Implement real-time monitoring and alert systems to detect power theft patterns early and prevent future occurrences.</p>
+                        </div>
+                        <div class="recommendation-card">
+                            <h4><i class="fas fa-chart-bar"></i> Pattern Analysis</h4>
+                            <p>Analyze consumption patterns over time to identify unusual spikes or drops that may indicate power theft activities.</p>
+                        </div>
+                        <div class="recommendation-card">
+                            <h4><i class="fas fa-handshake"></i> Legal Action</h4>
+                            <p>Prepare documentation for legal proceedings if confirmed cases of power theft are found after investigation.</p>
+                        </div>
+                </div>
+            </div>
+
+            <!-- Precautions Section -->
+            <div class="results-section">
+                <div class="section-title">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Precautions & Best Practices</span>
+                </div>
+                <ul class="precautions-list">
+                    <li>
+                        <i class="fas fa-check"></i>
+                        <span>Regularly monitor energy consumption patterns and investigate any sudden changes or anomalies.</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i>
+                        <span>Implement smart meters with tamper detection capabilities to prevent unauthorized access.</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i>
+                        <span>Conduct periodic physical inspections of meters and electrical connections in high-risk areas.</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i>
+                        <span>Maintain detailed records of all meter readings, installations, and maintenance activities.</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i>
+                        <span>Use advanced analytics and machine learning models to identify suspicious patterns early.</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i>
+                        <span>Establish clear protocols for reporting and handling suspected power theft cases.</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i>
+                        <span>Train staff on recognizing signs of power theft and proper investigation procedures.</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-check"></i>
+                        <span>Collaborate with law enforcement agencies for serious cases of power theft.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Result Information Section -->
+            <div class="results-section">
+                <div class="section-title">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Result Information</span>
+                </div>
+                <div class="alert-box info">
+                    <i class="fas fa-info-circle"></i>
+                    <div class="alert-box-content">
+                        <h4>About These Results</h4>
+                        <p>
+                            These predictions are generated using Quantum Machine Learning algorithms trained on historical smart grid data. 
+                            The model analyzes various features including consumption patterns, voltage levels, and load characteristics to identify 
+                            potential power theft. Results marked as "Theft" indicate suspicious patterns that require further investigation. 
+                            Results marked as "No-Theft" indicate normal consumption patterns. Please note that these are predictive indicators 
+                            and should be verified through physical inspection and additional analysis.
+                        </p>
+                    </div>
+                </div>
+                <div class="alert-box warning">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <div class="alert-box-content">
+                        <h4>Important Notes</h4>
+                        <p>
+                            • The accuracy of predictions depends on the quality and completeness of input data.<br>
+                            • False positives may occur due to legitimate reasons such as equipment malfunction or unusual but legal usage patterns.<br>
+                            • Always verify predictions through physical inspection before taking legal action.<br>
+                            • Keep the machine learning model updated with recent data for improved accuracy.<br>
+                            • Consult with domain experts when interpreting results for critical decisions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="/home" class="btn-action">
+                    <i class="fas fa-cloud-upload-alt"></i> Upload Another File
+                </a>
+                <a href="/graphs" class="btn-action" style="margin-left: 15px;">
+                    <i class="fas fa-chart-line"></i> Data Visualization
+                </a>
+            </div>
+
+        {% else %}
+            <div class="no-results">
+                <i class="fas fa-inbox"></i>
+                <h3>No Results Available</h3>
+                <p>Please upload a CSV file to generate predictions.</p>
+                <a href="/home" class="btn-action">Upload File</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/lib/easing/easing.min.js"></script>
+    <script src="../static/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../static/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="../static/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="../static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="../static/mail/jqBootstrapValidation.min.js"></script>
+    <script src="../static/mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="../static/js/main.js"></script>
+
+    <!-- Result Page Custom Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            {% if results and columns %}
+            const resultsData = {{ results | tojson | safe }};
+            const columnsData = {{ columns | tojson | safe }};
+            const predictionIndex = columnsData.length - 1;
+            
+            let theftCount = 0;
+            let noTheftCount = 0;
+            
+            resultsData.forEach(row => {
+                if (row[predictionIndex] === 'Theft') {
+                    theftCount++;
+                } else if (row[predictionIndex] === 'No-Theft') {
+                    noTheftCount++;
+                }
+            });
+            
+            const totalCount = resultsData.length;
+            const theftPercentage = totalCount > 0 ? ((theftCount / totalCount) * 100).toFixed(2) : 0;
+            const noTheftPercentage = totalCount > 0 ? ((noTheftCount / totalCount) * 100).toFixed(2) : 0;
+            
+            // Update statistics
+            document.getElementById('theft-count').textContent = theftCount;
+            document.getElementById('no-theft-count').textContent = noTheftCount;
+            document.getElementById('theft-percentage').textContent = theftPercentage;
+            document.getElementById('no-theft-percentage').textContent = noTheftPercentage;
+            
+            // Update alert box
+            const alertContainer = document.getElementById('alert-container');
+            if (theftCount > 0) {
+                alertContainer.innerHTML = `
+                    <div class="alert-box danger">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div class="alert-box-content">
+                            <h4>Attention Required</h4>
+                            <p>${theftCount} record(s) have been flagged for potential power theft. Please review the recommendations and precautions below.</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                alertContainer.innerHTML = `
+                    <div class="alert-box info">
+                        <i class="fas fa-check-circle"></i>
+                        <div class="alert-box-content">
+                            <h4>All Clear</h4>
+                            <p>No power theft detected in the analyzed records. All systems are operating normally.</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Update recommendations
+            const recommendationsGrid = document.getElementById('recommendations-grid');
+            if (theftCount > 0) {
+                recommendationsGrid.innerHTML = `
+                    <div class="recommendation-card">
+                        <h4><i class="fas fa-search"></i> Immediate Investigation</h4>
+                        <p>Conduct on-site inspections for all flagged locations. Verify meter readings and check for any unauthorized connections or tampering.</p>
+                    </div>
+                    <div class="recommendation-card">
+                        <h4><i class="fas fa-clipboard-check"></i> Data Verification</h4>
+                        <p>Cross-reference the flagged records with historical data and billing records to identify patterns or discrepancies.</p>
+                    </div>
+                    <div class="recommendation-card">
+                        <h4><i class="fas fa-user-shield"></i> Security Audit</h4>
+                        <p>Perform a comprehensive security audit of the smart grid infrastructure, focusing on areas with detected anomalies.</p>
+                    </div>
+                    <div class="recommendation-card">
+                        <h4><i class="fas fa-bell"></i> Alert System</h4>
+                        <p>Implement real-time monitoring and alert systems to detect power theft patterns early and prevent future occurrences.</p>
+                    </div>
+                    <div class="recommendation-card">
+                        <h4><i class="fas fa-chart-bar"></i> Pattern Analysis</h4>
+                        <p>Analyze consumption patterns over time to identify unusual spikes or drops that may indicate power theft activities.</p>
+                    </div>
+                    <div class="recommendation-card">
+                        <h4><i class="fas fa-handshake"></i> Legal Action</h4>
+                        <p>Prepare documentation for legal proceedings if confirmed cases of power theft are found after investigation.</p>
+                    </div>
+                `;
+            } else {
+                recommendationsGrid.innerHTML = `
+                    <div class="recommendation-card">
+                        <h4><i class="fas fa-shield-alt"></i> Maintain Monitoring</h4>
+                        <p>Continue regular monitoring and analysis to ensure the grid remains secure and free from power theft activities.</p>
+                    </div>
+                    <div class="recommendation-card">
+                        <h4><i class="fas fa-sync-alt"></i> Regular Updates</h4>
+                        <p>Keep the machine learning model updated with new data to maintain high accuracy in detection capabilities.</p>
+                    </div>
+                    <div class="recommendation-card">
+                        <h4><i class="fas fa-chart-line"></i> Performance Tracking</h4>
+                        <p>Track system performance metrics and maintain historical records for trend analysis and system improvements.</p>
+                    </div>
+                `;
+            }
+            {% endif %}
+        });
+    </script>
+</body>
+
+</html>

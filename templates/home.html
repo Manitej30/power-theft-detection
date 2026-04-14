@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>UserScreen - Power Theft Detection in Smart Grids Using Quantum Machine Learning</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Flaticon Font -->
+    <link href="../static/lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../static/css/style.css" rel="stylesheet">
+    
+    <!-- Upload Form Custom Stylesheet -->
+    <link href="../static/css/upload.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        
+        <div class="row py-3 px-lg-5">
+            <div class="col-lg-4">
+                <a href="" class="navbar-brand d-none d-lg-block">
+                    <h1 class="m-0 display-5 text-capitalize"><span class="text-primary">QML </span>Grid</h1>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
+            <a href="" class="navbar-brand d-block d-lg-none">
+                <h1 class="m-0 display-5 text-capitalize font-italic text-white"><span class="text-primary">Safety</span>First</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                <div class="navbar-nav ml-auto py-0">
+                    <a href="#predictform" class="nav-item nav-link active">Power Theft Prediction</a>
+                    <a href="/graphs" class="nav-item nav-link">Graphs</a>
+                    <a href="../static/Notebook.html" class="nav-item nav-link">Notebook</a>
+                    <a href="/" class="nav-item nav-link">Logout</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0">
+        <div id="header-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" src="../static/img/carousel-1.jpg" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h3 class="text-white text-uppercase mb-3 d-none d-sm-block">Welcome To Dashboard</h3>
+                            <h1 class="display-4 text-white mb-3">Power Theft Detection in Smart Grids Using Quantum Machine Learning</h1>
+                            <h5 class="text-white mb-3 d-none d-sm-block">This project detects power theft in smart grids using Quantum Machine Learning, leveraging quantum computing's speed and accuracy to analyze consumption patterns and identify anomalies in real-time for enhanced energy security.</h5>
+                            <a href="#predictform" class="btn btn-lg btn-secondary mt-3 mt-md-4 px-4">Get Prediction</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" src="../static/img/carousel-2.jpg" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h3 class="text-white text-uppercase mb-3 d-none d-sm-block">Welcome To Dashboard</h3>
+                            <h1 class="display-4 text-white mb-3">Power Theft Detection in Smart Grids Using Quantum Machine Learning</h1>
+                            <h5 class="text-white mb-3 d-none d-sm-block">This project detects power theft in smart grids using Quantum Machine Learning, leveraging quantum computing's speed and accuracy to analyze consumption patterns and identify anomalies in real-time for enhanced energy security.</h5>
+                            <a href="#predictform" class="btn btn-lg btn-secondary mt-3 mt-md-4 px-4">Get Prediction</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                <div class="btn btn-primary rounded" style="width: 45px; height: 45px;">
+                    <span class="carousel-control-prev-icon mb-n2"></span>
+                </div>
+            </a>
+            <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                <div class="btn btn-primary rounded" style="width: 45px; height: 45px;">
+                    <span class="carousel-control-next-icon mb-n2"></span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!-- Carousel End -->
+
+    <!-- Upload Section Start -->
+    <div class="upload-section" id="predictform">
+        <div class="upload-container">
+            <div class="upload-header">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h2>Power Theft Detection</h2>
+                <p>Upload your CSV file to analyze and detect power theft patterns</p>
+            </div>
+
+            {% if error_message %}
+            <div id="alert-message" class="alert-message show error">
+                <i class="fas fa-exclamation-circle"></i> {{ error_message }}
+            </div>
+            {% else %}
+            <div id="alert-message" class="alert-message"></div>
+            {% endif %}
+
+            <form id="upload-form" action="/predict" method="POST" enctype="multipart/form-data" class="upload-form">
+                <div class="file-upload-wrapper">
+                    <div class="file-upload-area" id="file-upload-area">
+                        <i class="fas fa-file-csv"></i>
+                        <h3>Drag & Drop Your File</h3>
+                        <p>or click to browse</p>
+                        <p class="file-info" id="file-info"></p>
+                        <input 
+                            type="file" 
+                            name="file" 
+                            id="file-input" 
+                            class="file-input" 
+                            accept=".csv"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="upload-requirements">
+                    <h4>
+                        <i class="fas fa-info-circle"></i>
+                        File Requirements
+                    </h4>
+                    <ul>
+                        <li>File format must be CSV (Comma Separated Values)</li>
+                        <li>File should contain smart grid consumption data</li>
+                        <li>Ensure all required feature columns are present</li>
+                        <li>Maximum file size: 10MB recommended</li>
+                        <li>Data should be properly formatted and validated</li>
+                    </ul>
+                </div>
+
+                <div class="upload-progress" id="upload-progress">
+                    <p style="color: #2c3e50; font-weight: 600; margin-bottom: 10px;">
+                        <i class="fas fa-spinner fa-spin"></i> Processing your file...
+                    </p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progress-bar">0%</div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-upload" id="btn-upload">
+                    <i class="fas fa-upload"></i>
+                    <span>Upload & Analyze</span>
+                </button>
+            </form>
+
+            <div class="upload-features">
+                <div class="feature-item">
+                    <i class="fas fa-bolt"></i>
+                    <h4>Fast Analysis</h4>
+                    <p>Quick detection using Quantum ML</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Secure Processing</h4>
+                    <p>Your data is processed securely</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Detailed Reports</h4>
+                    <p>Comprehensive analysis results</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <h4>Accurate Results</h4>
+                    <p>High precision detection</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Upload Section End -->
+    
+
+    <!-- Footer Start -->
+    <div class="container-fluid text-white py-4 px-sm-3 px-md-5" style="background: #111111;">        
+        <div class=" text-center text-md-between mb-3 mb-md-0">
+            <p class="m-0 text-white">
+                &copy; <a class="text-white font-weight-bold" href="#">QML Grid</a>. All Rights Reserved. 
+                
+                Designed by <a class="text-white font-weight-bold" href="#">QML Grid</a>
+            </p>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/lib/easing/easing.min.js"></script>
+    <script src="../static/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../static/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="../static/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="../static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="../static/mail/jqBootstrapValidation.min.js"></script>
+    <script src="../static/mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="../static/js/main.js"></script>
+
+    <!-- Upload Form Custom Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('file-input');
+            const fileUploadArea = document.getElementById('file-upload-area');
+            const fileInfo = document.getElementById('file-info');
+            const uploadForm = document.getElementById('upload-form');
+            const btnUpload = document.getElementById('btn-upload');
+            const alertMessage = document.getElementById('alert-message');
+            const uploadProgress = document.getElementById('upload-progress');
+            const progressBar = document.getElementById('progress-bar');
+
+            // Function to show alert
+            function showAlert(message, type = 'error') {
+                const icon = type === 'error' ? '<i class="fas fa-exclamation-circle"></i>' : '<i class="fas fa-check-circle"></i>';
+                alertMessage.innerHTML = icon + ' ' + message;
+                alertMessage.className = 'alert-message show ' + type;
+                
+                // Scroll to alert message
+                alertMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+                setTimeout(() => {
+                    alertMessage.classList.remove('show');
+                }, 8000);
+            }
+
+            // Check if there's an error message from server on page load
+            {% if error_message %}
+            // Error message is already displayed via Jinja2 template
+            // Scroll to it on page load
+            setTimeout(() => {
+                const alertEl = document.getElementById('alert-message');
+                if (alertEl) {
+                    alertEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }, 100);
+            {% endif %}
+
+            // File input change handler
+            fileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    if (!file.name.endsWith('.csv')) {
+                        showAlert('Please upload a CSV file only.', 'error');
+                        fileInput.value = '';
+                        return;
+                    }
+                    
+                    if (file.size > 10 * 1024 * 1024) {
+                        showAlert('File size should be less than 10MB.', 'error');
+                        fileInput.value = '';
+                        return;
+                    }
+
+                    fileUploadArea.classList.add('has-file');
+                    fileInfo.textContent = `Selected: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`;
+                    showAlert('File selected successfully!', 'success');
+                }
+            });
+
+            // Drag and drop handlers
+            fileUploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                fileUploadArea.classList.add('dragover');
+            });
+
+            fileUploadArea.addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                fileUploadArea.classList.remove('dragover');
+            });
+
+            fileUploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                fileUploadArea.classList.remove('dragover');
+
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    const file = files[0];
+                    if (file.name.endsWith('.csv')) {
+                        fileInput.files = files;
+                        fileInput.dispatchEvent(new Event('change'));
+                    } else {
+                        showAlert('Please drop a CSV file only.', 'error');
+                    }
+                }
+            });
+
+            // Form submission handler
+            uploadForm.addEventListener('submit', function(e) {
+                const file = fileInput.files[0];
+                
+                if (!file) {
+                    e.preventDefault();
+                    showAlert('Please select a file to upload.', 'error');
+                    return;
+                }
+
+                if (!file.name.endsWith('.csv')) {
+                    e.preventDefault();
+                    showAlert('Please upload a CSV file only.', 'error');
+                    return;
+                }
+
+                // Show loading state
+                btnUpload.classList.add('loading');
+                btnUpload.disabled = true;
+                uploadProgress.classList.add('show');
+                
+                // Simulate progress (since we can't track actual upload progress easily)
+                let progress = 0;
+                const progressInterval = setInterval(() => {
+                    progress += 10;
+                    if (progress <= 90) {
+                        progressBar.style.width = progress + '%';
+                        progressBar.textContent = progress + '%';
+                    }
+                }, 200);
+
+                // Note: The form will submit normally, progress will complete on result page
+                // Clear interval after form submits (this is just for visual feedback)
+                setTimeout(() => {
+                    clearInterval(progressInterval);
+                }, 2000);
+            });
+
+            // Click on upload area to trigger file input
+            fileUploadArea.addEventListener('click', function(e) {
+                if (e.target !== fileInput) {
+                    fileInput.click();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
